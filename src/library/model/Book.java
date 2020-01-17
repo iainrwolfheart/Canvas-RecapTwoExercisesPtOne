@@ -9,6 +9,7 @@ public class Book {
 	private String title;
 	private double price;
 	private List<String> authors;
+	private Location location;
 	
 	
 	public Book (String title, double price, String... writers) {
@@ -24,12 +25,17 @@ public class Book {
 		}
 		this.authors = writersList;
 	}
+	public Book (String title, double price, Location location, String... writers) {
+		this(title, price, writers);
+		this.setLocation(location);
+	}
 
 	@Override
 	public String toString() {
 		DecimalFormat decimal = new DecimalFormat("#.00");
 		return "Book: '" + title + "'\nPrice: £" + decimal.format(price) + "\nAuthors: " 
-				+ authors.toString().replace("[","").replace("]","");
+				+ authors.toString().replace("[","").replace("]","") + "\n" +
+				location.toString() + "\n";
 	}
 
 	public String getTitle() {
@@ -59,6 +65,14 @@ public class Book {
 		if (this.authors.size() < 3) {
 			this.authors.add(author);
 		}
-		else System.out.println("No more authors can be added to the book's credits");
+		else System.out.println(author + " cannot be added to the book's credits.\n");
+	}
+	
+	public Location getLocation() {
+		return location;	
+	}
+	
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 }
